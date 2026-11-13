@@ -64,3 +64,464 @@ const data=[
 {id:"esim",name:"eSIM won't download or activate",cat:"SIM & Activation",devices:["iPhone","Samsung","Google Pixel","Other Android"],symptoms:"Unable to activate eSIM, eSIM stuck activating, no cellular plan, QR code error",questions:["Is this a new line, an upgrade, or a transfer from another phone?","Is the old phone still active?","What exact error appears, and has the QR code or activation link already been used?"],steps:["Connect the phone to reliable Wi-Fi and install available system updates if practical.","Confirm the device is eSIM-compatible and not restricted by a carrier lock.","Find the EID and IMEI in device settings/about screen; share them only through authorized carrier processes.","iPhone: Settings → Cellular → Add eSIM. Android menu paths vary; Samsung commonly uses Settings → Connections → SIM manager → Add eSIM.","Follow the carrier's current activation flow. QR codes and transfer methods differ by carrier and may be single-use.","Do not delete an existing working eSIM until the replacement is confirmed active or the carrier directs the customer to do so.","If activation fails, have the carrier verify the line assignment and issue/refresh the correct activation method."],verify:"Confirm the correct number and carrier plan appear, then test calls, SMS and cellular data.",escalate:"Repeated activation errors, QR code already used, EID/IMEI mismatch, lock issue or carrier provisioning failure.",say:"“Before we remove or replace anything, let’s protect the working line and confirm the carrier has assigned the eSIM to the right device.”"},
 {id:"wifi",name:"Phone won't connect to Wi-Fi",cat:"Connectivity",devices:["iPhone","Samsung","Google Pixel","Other Android"],symptoms:"Incorrect password, unable to join, connected without internet, Wi-Fi keeps disconnecting",questions:["Can other devices connect to this same Wi-Fi network?","Can this phone connect to a different Wi-Fi network?","Does it say incorrect 
 {id:"battery",name:"Battery drains unusually fast",cat:"Battery & Power",devices:["iPhone","Samsung","Google Pixel","Other Android"],symptoms:"Battery drops quickly, phone gets warm, unexpected shutdowns",questions:["When did the drain begin—after an update, app install, or damage?","Does it happen while the phone is idle or only during use?","Is the phone unusually hot, swollen, or physically damaged?"],steps:["Check battery usage by app. iPhone: Settings → Battery. Android: Settings → Battery → Battery usage (wording varies).","Look for an app using unusually high background power; update it or restrict background activity where appropriate.","Lower screen brightness and review location, hotspot and high-refresh-rate use if relevant.","Restart the phone and install reputable system/app updates.","Check battery health on supported models; readings and availability vary by manufacturer.","If the battery is swollen, stop using/charging the device and arrange professional service. Do not press or puncture it."],verify:"Compare battery percentage and usage over a normal-use period; confirm abnormal heat or shutdowns are gone.",escalate:"Swelling, smoke, burning smell, extreme heat, physical damage or repeated unexpected shutdowns.",say:"“I’m checking which apps and features
+{
+id:"esim",
+name:"eSIM won't download or activate",
+cat:"SIM & Activation",
+devices:allDevices,
+symptoms:"Activation error, stuck activating, missing cellular plan or QR-code failure.",
+questions:[
+"Is this a new line, upgrade or replacement?",
+"Does the old phone still work?",
+"What exact error appears?"
+],
+steps:[
+"Connect to reliable Wi-Fi.",
+"Confirm the model supports eSIM and check carrier-lock status.",
+"Verify IMEI, EID and line assignment through authorized carrier tools.",
+"iPhone: Settings → Cellular → Add eSIM.",
+"Samsung: Settings → Connections → SIM manager → Add eSIM. Pixel: Settings → Network & internet → SIMs; follow the available add-SIM prompts.",
+"Follow the carrier's activation method. Some QR codes are single-use.",
+"Do not delete a working eSIM before replacement service is confirmed or the carrier directs it.",
+"Ask the carrier to refresh or reissue activation if needed."
+],
+verify:"Confirm the correct number and test calls, SMS and cellular data.",
+escalate:"Repeated activation errors, used QR code, identifier mismatch or carrier lock.",
+say:"Let’s protect the working line while we verify the new eSIM assignment."
+},
+{
+id:"wifi",
+name:"Phone won't connect to Wi-Fi",
+cat:"Connectivity",
+devices:allDevices,
+symptoms:"Unable to join, incorrect password, connected without internet or disconnections.",
+questions:[
+"Can other devices use this network?",
+"Can this phone use another network?",
+"What exact error appears?"
+],
+steps:[
+"Toggle Wi-Fi off and on.",
+"Restart the phone and, if appropriate, the router.",
+"Forget the network and reconnect with the confirmed password.",
+"iPhone: Settings → Wi-Fi → network info → Forget This Network. Android: open the network's settings and choose Forget.",
+"Check VPN, private DNS and any required network sign-in page.",
+"Check for available software updates.",
+"Before resetting network settings, explain which saved connections and settings will be removed."
+],
+verify:"Reconnect and open multiple websites or apps.",
+escalate:"Other devices also fail on this network, or this phone fails on multiple known-good networks.",
+say:"We’ll compare devices and networks to see where the issue follows."
+},
+{
+id:"battery",
+name:"Battery drains unusually fast",
+cat:"Battery & Power",
+devices:allDevices,
+symptoms:"Rapid battery loss, unusual warmth or unexpected shutdowns.",
+questions:[
+"Did this start after an update or app install?",
+"Does it happen while idle?",
+"Is there swelling, damage or extreme heat?"
+],
+steps:[
+"Check Settings → Battery for usage details; Android menu wording varies.",
+"Look for unusually high app or background usage.",
+"Update the affected app or review its background activity.",
+"Review screen brightness, location use and hotspot activity.",
+"Restart and check system updates.",
+"Check battery health if the model supports it.",
+"If swollen, stop using and charging the device and arrange professional service. Do not press or puncture it."
+],
+verify:"Monitor normal use and confirm unusual heat or shutdowns have stopped.",
+escalate:"Swelling, smoke, burning smell, extreme heat or repeated shutdowns.",
+say:"We’ll check what is consuming power before deciding whether the battery needs service."
+},
+{
+id:"charging",
+name:"Phone won't charge",
+cat:"Battery & Power",
+devices:allDevices,
+symptoms:"No charging indicator, intermittent charging or moisture warning.",
+questions:[
+"Have a different compatible cable and adapter been tested?",
+"Is there a moisture or temperature warning?",
+"Was the phone damaged or exposed to liquid?"
+],
+steps:[
+"Try a known-good compatible cable, adapter and wall outlet.",
+"Inspect the port with a light. Do not insert metal objects or scrape contacts.",
+"For a moisture warning, disconnect power and follow manufacturer drying instructions. Do not use heat.",
+"Restart only if the device is safe, dry and not unusually hot.",
+"Try wireless charging only if supported and the phone is dry and undamaged.",
+"Arrange approved diagnostics if charging still fails."
+],
+verify:"Confirm steady charging without unusual heat.",
+escalate:"Damaged port, liquid exposure, swelling, burning smell or failure with known-good accessories.",
+say:"Let’s rule out the charging accessories and inspect the phone safely."
+},
+{
+id:"iphone-iphone",
+name:"Transfer iPhone to iPhone",
+cat:"Data Transfer",
+devices:["iPhone"],
+symptoms:"Moving apps, photos, messages and settings to a new iPhone.",
+questions:[
+"Is the new iPhone on its setup screen?",
+"Can the old iPhone be unlocked?",
+"Is there a recent backup and enough storage?"
+],
+steps:[
+"Back up the old iPhone: Settings → customer name → iCloud → iCloud Backup → Back Up Now.",
+"Connect the old iPhone to Wi-Fi, enable Bluetooth and power both phones.",
+"Place the new iPhone beside the unlocked old phone.",
+"Follow Quick Start and verify the animation or code.",
+"Follow Apple Account and device setup prompts.",
+"Choose direct transfer or an iCloud restore when offered.",
+"Keep devices close and powered until transfer finishes.",
+"Activate the SIM/eSIM separately as required. Do not erase the old phone before verification."
+],
+verify:"Check contacts, photos, messages and important apps. Test calls and cellular data.",
+escalate:"Quick Start fails, account recovery is needed or the backup cannot restore.",
+say:"We’ll use Quick Start and keep your old phone intact until the important information is checked.",
+sources:[
+["Apple Quick Start","https://support.apple.com/en-us/102659"]
+]
+},
+{
+id:"samsung-samsung",
+name:"Transfer Samsung to Samsung",
+cat:"Data Transfer",
+devices:["Samsung"],
+symptoms:"Moving information from an older Galaxy to a new Galaxy.",
+questions:[
+"Can both phones be unlocked?",
+"Is a compatible cable available?",
+"Is the new phone already set up?"
+],
+steps:[
+"Charge both phones and update Smart Switch if needed.",
+"On the new Galaxy, search Settings for Smart Switch.",
+"Choose Receive data → Galaxy/Android and select Cable or Wireless.",
+"On the old Galaxy, open Smart Switch and choose the sending option.",
+"Connect with the chosen method and approve prompts.",
+"Select the categories to transfer.",
+"Keep both devices connected and powered until completion.",
+"Reopen important apps and sign in as needed. Do not erase the old phone yet."
+],
+verify:"Check contacts, messages, photos, files and key apps. Test carrier service separately.",
+escalate:"Detection fails, transfer stops repeatedly or required app data is unsupported.",
+say:"Smart Switch can copy much of your information, and we’ll review what arrived.",
+sources:[
+["Samsung Smart Switch","https://www.samsung.com/us/support/answer/ANS10001345/"]
+]
+},
+{
+id:"android-pixel",
+name:"Transfer Android to Google Pixel",
+cat:"Data Transfer",
+devices:["Google Pixel"],
+symptoms:"Moving data from an Android phone to a new Pixel.",
+questions:[
+"What is the old phone model?",
+"Can both phones be unlocked?",
+"Is there a Google backup and enough storage?"
+],
+steps:[
+"Back up the old phone and sync important Google data.",
+"Back up WhatsApp within WhatsApp if its chats are needed.",
+"Charge both phones and connect to Wi-Fi.",
+"During Pixel setup, choose the option to copy apps and data.",
+"Use the cable or wireless pairing method offered by the Pixel.",
+"Select data categories and keep devices connected until finished.",
+"If setup is complete, check supported post-setup transfer options before considering any reset.",
+"Complete SIM/eSIM activation separately and preserve the old phone."
+],
+verify:"Review contacts, photos, texts, apps, account sync and any WhatsApp restore.",
+escalate:"Pairing repeatedly fails, storage is insufficient or required data cannot restore.",
+say:"We’ll use this Pixel’s supported transfer method and check the important data afterward.",
+sources:[
+["Google Pixel transfer","https://support.google.com/pixelphone/answer/7129955"]
+]
+},Part 3 of 3. Copy and paste this at the end of Part 2, after its final comma.
+
+Then tap Commit changes…, choose Commit directly to the main branch, and confirm Commit changes.
+
+{
+id:"android-iphone",
+name:"Transfer Android to iPhone",
+cat:"Data Transfer",
+devices:["iPhone"],
+symptoms:"Switching from Android to iPhone with contacts, messages and photos.",
+questions:[
+"Is the iPhone still in initial setup?",
+"Can the Android phone run Move to iOS?",
+"Will the selected content fit?"
+],
+steps:[
+"Back up important Android data and connect both phones to power.",
+"Turn on Android Wi-Fi.",
+"During iPhone setup, go to Transfer Your Apps & Data → From Android.",
+"Open Apple's Move to iOS app on Android.",
+"Enter the code shown on the iPhone and select content.",
+"Keep Move to iOS open and both devices nearby until the iPhone progress bar finishes.",
+"If iPhone setup is already complete, consider manual transfer. Restarting setup requires erasing the iPhone; obtain consent and verify its backup first.",
+"Finish setup, install remaining apps and activate carrier service separately."
+],
+verify:"Check contacts, messages, photos, calendars and supported chat history. Test calls.",
+escalate:"Repeated disconnects, insufficient storage or existing iPhone data that must be preserved.",
+say:"Move to iOS can transfer many items. We’ll check your important information and set up remaining apps separately.",
+sources:[
+["Apple Move to iOS","https://support.apple.com/en-us/118670"]
+]
+},
+{
+id:"iphone-samsung",
+name:"Transfer iPhone to Samsung Galaxy",
+cat:"Data Transfer",
+devices:["Samsung"],
+symptoms:"Moving iPhone information to a Galaxy using Smart Switch.",
+questions:[
+"Can the iPhone be unlocked?",
+"Is a compatible cable available?",
+"Can the customer access their Apple Account if using iCloud?"
+],
+steps:[
+"Back up the iPhone and confirm important data is saved.",
+"Open Smart Switch on Galaxy.",
+"Choose Receive data → iPhone/iPad.",
+"For cable transfer, connect the devices and tap Trust on iPhone if prompted.",
+"For iCloud transfer, choose Get data from iCloud and let the customer complete sign-in and verification privately.",
+"Select supported categories and start transfer.",
+"Follow any separate WhatsApp migration prompts.",
+"After moving the number away from iPhone, turn off iMessage for that number. Keep the old phone until verification."
+],
+verify:"Review contacts, photos, calendars, supported messages and apps. Test calls and SMS.",
+escalate:"Account verification fails, the phone cannot be detected or required data is unsupported.",
+say:"We’ll choose a supported transfer method and check which information came across.",
+sources:[
+["Samsung Smart Switch","https://www.samsung.com/us/support/answer/ANS10001345/"]
+]
+},
+{
+id:"iphone-android",
+name:"Transfer iPhone to other Android",
+cat:"Data Transfer",
+devices:["Other Android","Google Pixel"],
+symptoms:"Moving from iPhone to a non-Samsung Android phone.",
+questions:[
+"What is the receiving phone's exact model?",
+"Is it still in setup?",
+"Is a compatible cable available?"
+],
+steps:[
+"Identify the receiving phone's official migration method.",
+"Back up the iPhone and save important contacts and photos.",
+"During Android setup, choose the offered iPhone data-copy option.",
+"Use the cable or wireless method shown on screen.",
+"Unlock iPhone and approve Trust if prompted.",
+"Select supported categories and keep devices connected.",
+"If setup is already complete, check manufacturer-supported transfer options before considering a reset.",
+"Activate carrier service separately and turn off iMessage for the transferred number."
+],
+verify:"Check contacts, photos, supported messages, calendars and key apps. Test calls, SMS and data.",
+escalate:"Pairing fails repeatedly, required categories are unsupported or account recovery is needed.",
+say:"We’ll follow the transfer process for this exact Android model and verify your important information.",
+sources:[
+["Google Android switching guide","https://support.google.com/android/answer/6193424"]
+]
+},
+{
+id:"activation",
+name:"New phone won't activate",
+cat:"SIM & Activation",
+devices:allDevices,
+symptoms:"Activation failed, missing phone number or no carrier connection.",
+questions:[
+"Is this a new line, upgrade, replacement or BYOD?",
+"Does the old phone still work?",
+"What exact error appears?"
+],
+steps:[
+"Connect to reliable Wi-Fi.",
+"Confirm device compatibility and carrier-lock status.",
+"Verify device identifiers and SIM/eSIM assignment using authorized carrier tools.",
+"Follow the carrier's activation process.",
+"Restart after provisioning is confirmed.",
+"For a number transfer, check port status. Do not cancel old service before the transfer completes."
+],
+verify:"Confirm the correct number and test incoming/outgoing calls, SMS and mobile data.",
+escalate:"Identifier rejection, account mismatch, incomplete port, carrier lock or provisioning failure.",
+say:"I’ll verify the device and line, complete activation and test each service."
+}
+];
+const categories=[
+"All problems",
+"Network",
+"Calling",
+"Messaging",
+"SIM & Activation",
+"Connectivity",
+"Battery & Power",
+"Data Transfer"
+];
+let selected="sos";
+let activeCategory="All problems";
+const $=id=>document.getElementById(id);
+function escapeHTML(value){
+return String(value).replace(/[&<>"']/g,char=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+}[char]));
+}
+function filtered(){
+const query=$("search").value.toLowerCase().trim();
+const device=$("device").value;
+return data.filter(item=>{
+const text=[
+item.name,
+item.symptoms,
+...item.questions,
+...item.steps
+].join(" ").toLowerCase();
+return (
+(activeCategory==="All problems"||item.cat===activeCategory)&&
+(device==="All devices"||item.devices.includes(device))&&
+(!query||text.includes(query))
+);
+});
+}
+function renderCategories(){
+$("categories").replaceChildren();
+categories.forEach(category=>{
+const button=document.createElement("button");
+button.textContent=category;
+button.className=activeCategory===category?"active":"";
+button.setAttribute("aria-pressed",activeCategory===category);
+button.onclick=()=>{
+activeCategory=category;
+selected=filtered()[0]?.id;
+render();
+};
+$("categories").appendChild(button);
+});
+}
+function render(){
+renderCategories();
+const matches=filtered();
+$("count").textContent=
+matches.length+" scenario"+(matches.length===1?"":"s")+" found";
+if(!matches.some(item=>item.id===selected)){
+selected=matches[0]?.id;
+}
+$("list").replaceChildren();
+matches.forEach(item=>{
+const button=document.createElement("button");
+button.textContent=item.name;
+button.className=item.id===selected?"active":"";
+button.setAttribute("aria-pressed",item.id===selected);
+button.onclick=()=>{
+selected=item.id;
+render();
+};
+$("list").appendChild(button);
+});
+if(!matches.length){
+$("detail").innerHTML=
+'<p>No matching guides. Try another search or category.</p>';
+return;
+}
+const item=matches.find(item=>item.id===selected);
+const e=escapeHTML;
+$("detail").innerHTML=`
+<div class="tag">${e(item.cat)} · FIELD GUIDE</div>
+<h2>${e(item.name)}</h2>
+<p class="tag">${e(item.devices.join(" · "))}</p>
+<section>
+<h3>Common symptoms</h3>
+<p>${e(item.symptoms)}</p>
+</section>
+<section>
+<h3>1 · Questions to ask</h3>
+<ol>
+${item.questions.map(question=>`<li>${e(question)}</li>`).join("")}
+</ol>
+</section>
+<section>
+<h3>2 · Troubleshooting checklist</h3>
+<ul class="checks">
+${item.steps.map((step,index)=>`
+<li>
+<input type="checkbox" id="step-${index}">
+<label for="step-${index}">${e(step)}</label>
+</li>
+`).join("")}
+</ul>
+</section>
+<section>
+<div class="good">
+<h3>3 · Verify the fix</h3>
+${e(item.verify)}
+</div>
+</section>
+<section>
+<div class="warning">
+<h3>4 · Escalate when</h3>
+${e(item.escalate)}
+</div>
+</section>
+<section>
+<h3>5 · What to tell the customer</h3>
+<p><em>“${e(item.say)}”</em></p>
+</section>
+${item.sources?`
+<section>
+<h3>Official instructions</h3>
+<ul>
+${item.sources.map(([label,url])=>`
+<li>
+<a href="${e(url)}" target="_blank" rel="noopener noreferrer">
+${e(label)}
+</a>
+</li>
+`).join("")}
+</ul>
+</section>
+`:""}
+<div class="actions">
+<button class="primary" id="copy-guide">Copy guide</button>
+<button id="print-guide">Print / Save PDF</button>
+</div>
+`;
+$("copy-guide").onclick=()=>copyReport(item.id);
+$("print-guide").onclick=()=>window.print();
+}
+async function copyReport(id){
+const item=data.find(item=>item.id===id);
+const text=[
+item.name,
+"Symptoms: "+item.symptoms,
+"Questions:",
+...item.questions.map((value,index)=>(index+1)+". "+value),
+"Troubleshooting:",
+...item.steps.map((value,index)=>(index+1)+". "+value),
+"Verify: "+item.verify,
+"Escalate: "+item.escalate,
+"Customer explanation: "+item.say
+].join("\n");
+try{
+await navigator.clipboard.writeText(text);
+alert("Guide copied.");
+}catch{
+alert("Copy is unavailable here. Use Print / Save PDF instead.");
+}
+}
+$("search").addEventListener("input",render);
+$("device").addEventListener("change",render);
+render();
+</script>
+</body>
+</html>
