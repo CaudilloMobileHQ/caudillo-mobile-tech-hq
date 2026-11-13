@@ -1,0 +1,31 @@
+{
+  "id": "./",
+  "name": "Mobile Troubleshooting Command Center",
+  "short_name": "Mobile Tech HQ",
+  "description": "Practical phone troubleshooting and device transfer guides for work.",
+  "lang": "en-US",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f5fa",
+  "theme_color": "#13233e",
+  "icons": [
+    {
+      "src": "./cmhq-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./cmhq-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "utilities",
+    "productivity"
+  ],
+  "prefer_related_applications": false
+}
