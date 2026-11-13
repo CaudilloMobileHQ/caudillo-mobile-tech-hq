@@ -2,526 +2,215 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111827">
-<title>Caudillo Mobile Tech HQ</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mobile Troubleshooting Command Center</title>
 <style>
-:root{--bg:#f3f5f9;--panel:#fff;--ink:#172033;--muted:#64748b;--line:#e2e8f0;--accent:#2563eb;--accent2:#dbeafe;--good:#15803d;--warn:#b45309}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-header{background:#111827;color:#fff;padding:24px 18px 22px}header .wrap,main{max-width:1050px;margin:auto}
-.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#93c5fd;font-weight:700}
-h1{font-size:clamp(25px,5vw,36px);line-height:1.12;margin:8px 0}header p{margin:8px 0 0;color:#cbd5e1;max-width:680px}
-main{padding:18px 14px 48px}.toolbar,.panel,.scenario{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 2px 10px #0f172a08}
-.toolbar{padding:14px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-bottom:14px}
-input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:var(--ink)}
-button{cursor:pointer;border:0;border-radius:10px;padding:10px 13px;font-weight:650}
-button.primary{background:var(--accent);color:#fff}button.secondary{background:#eef2f7;color:#263449}button:focus,input:focus,select:focus,textarea:focus{outline:3px solid #93c5fd;outline-offset:1px}
-.layout{display:grid;grid-template-columns:290px 1fr;gap:14px;align-items:start}
-.panel{padding:14px}.panel h2{font-size:16px;margin:0 0 10px}
-.category{display:flex;flex-direction:column;gap:5px}.category button{text-align:left;background:transparent;color:#334155;padding:9px 10px}.category button.active{background:var(--accent2);color:#1d4ed8}
-.count{color:var(--muted);font-size:12px;margin:8px 2px}
-.scenario{padding:20px}.eyebrow{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-h2.title{font-size:25px;line-height:1.2;margin:5px 0 8px}.meta{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 16px}.pill{font-size:12px;padding:4px 9px;border-radius:99px;background:#eef2ff;color:#3730a3}
-section{border-top:1px solid var(--line);padding:14px 0}section h3{font-size:15px;margin:0 0 8px}
-ul,ol{padding-left:22px;margin:7px 0}li{margin:6px 0}
-.checklist{list-style:none;padding:0}.checklist li{display:flex;gap:9px;align-items:flex-start;margin:9px 0}.checklist input{width:18px;height:18px;margin-top:3px;flex:0 0 auto}
-.callout{border-radius:11px;padding:11px 13px;background:#f0fdf4;border:1px solid #bbf7d0}.warning{background:#fffbeb;border-color:#fde68a}
-.customer{font-style:italic;color:#334155}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.empty{color:var(--muted);padding:24px;text-align:center}
-small.note{display:block;color:var(--muted);margin-top:16px;font-size:12px}
-@media(max-width:760px){.toolbar{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.category{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.scenario{padding:16px}}
-@media print{header{background:#fff;color:#111;padding:10px}header p,.toolbar,.sidebar,.actions{display:none!important}main{padding:0}.layout{display:block}.scenario,.panel{box-shadow:none;border:0}}
+:root{--ink:#162239;--blue:#1959b7;--line:#d5deea;--bg:#f2f5fa}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,sans-serif}header{background:#13233e;color:white;padding:25px 18px}header div,main{max-width:1150px;margin:auto}h1{font-size:clamp(25px,5vw,36px);line-height:1.15;margin:6px 0}header p{color:#cbd9ed;margin-bottom:0}.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8dc6ff}main{padding:16px}.panel,article{background:white;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}.filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;border:1px solid #a9b9cd;border-radius:8px;padding:10px;background:white;color:var(--ink)}button{border:1px solid var(--line);border-radius:8px;background:#edf3fc;color:var(--ink);padding:10px 12px;cursor:pointer}button:hover,button.active{background:#dceaff;border-color:var(--blue)}button.primary{background:var(--blue);color:white}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #e88b24;outline-offset:2px}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.actions label{display:flex;gap:6px;align-items:center}.actions input[type=checkbox]{width:20px;height:20px}.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:14px;align-items:start}.list{display:grid;gap:7px}.list button{text-align:left;background:white}.list button.active{background:#dceaff}h2{font-size:23px;line-height:1.25}h3{font-size:17px;margin:10px 0}section{border-top:1px solid var(--line);padding:12px 0}li{margin:8px 0}ol,ul{padding-left:23px}.checks{padding:0;list-style:none}.checks li{display:flex;gap:9px;align-items:flex-start}.checks input{width:20px;height:20px;flex-shrink:0;margin-top:3px}.good,.warning{padding:12px;border-radius:9px;background:#edf8ef}.warning{background:#fff5df}.muted,small{color:#516279}.pill{display:inline-block;background:#edf3fc;padding:3px 8px;border-radius:15px;font-size:13px;margin:3px}a{color:#164d9e}#status{margin:8px 0;min-height:1.5em}dialog{width:min(650px,94%);max-height:90vh;overflow:auto;border:1px solid var(--line);border-radius:14px}dialog label{display:block;margin:10px 0}dialog textarea{min-height:80px}dialog::backdrop{background:#10243e99}#copyFallback{min-height:200px}footer{font-size:13px;padding:12px 0;color:#516279}@media(max-width:760px){.filters,.layout{grid-template-columns:1fr}#results{max-height:290px;overflow:auto}header{padding:20px 16px}main{padding:12px}article{padding:14px}}@media print{header,aside,.panel,.actions,footer,dialog,#status{display:none!important}main{padding:0}.layout{display:block}article{border:0;margin:0;padding:0}section{break-inside:avoid}}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-<div class="kicker">Universal wireless support toolkit</div>
-<h1>Caudillo Mobile<br>Tech HQ</h1>
-<p>A practical, searchable field guide for iPhone and Android support across major wireless carriers.</p>
-</div></header>
+<header><div><div class="eyebrow">Caudillo Mobile HQ · Work toolkit</div><h1>Mobile Troubleshooting Command Center</h1><p>Find a guide → ask questions → follow safe steps → verify service.</p></div></header>
 <main>
-<div class="toolbar">
-<input id="search" type="search" placeholder="Search symptoms, settings, error messages…" aria-label="Search scenarios">
-<select id="device" aria-label="Device family"><option>All devices</option><option>iPhone</option><option>Samsung</option><option>Google Pixel</option><option>Other Android</option></select>
-<select id="carrier" aria-label="Carrier"><option>All carriers</option><option>T-Mobile</option><option>AT&amp;T</option><option>Verizon</option><option>Other carrier</option></select>
+<div class="panel">
+<div class="filters">
+<label>Search<input id="search" type="search" placeholder="No service, transfer, message blocking…"></label>
+<label>Device<select id="device"><option>All devices</option><option>iPhone</option><option>Samsung</option><option>Google Pixel</option><option>Other Android</option></select></label>
+<label>Carrier<select id="carrier"><option>All carriers</option><option>T-Mobile</option><option>AT&amp;T</option><option>Verizon</option><option>Other carrier</option></select></label>
 </div>
-<div class="layout">
-<aside class="panel sidebar">
-<h2>Problem categories</h2>
-<div class="category" id="categories"></div>
-<div class="count" id="count"></
-  <nav id="list" class="category"></nav>
-</aside>
-<div id="detail" class="scenario" aria-live="polite"></div>
+<div class="actions" id="quick" aria-label="Quick paths"></div>
+<div class="actions"><label><input id="savedOnly" type="checkbox">Saved only</label><button id="clear">Clear filters</button><button id="add">Add scenario</button><button id="export">Export saved/custom guides</button><button id="importButton">Import backup</button><input id="importFile" type="file" accept=".json,application/json" hidden></div>
+<small>Favorites and custom scenarios are saved in this browser. Export a backup to reuse them elsewhere. Do not enter customer information.</small>
+<div id="status" role="status" aria-live="polite"></div>
+<noscript><p class="warning">JavaScript must be enabled for search and guides to work.</p></noscript>
 </div>
-<small class="note">This is an independent reference tool, not an official carrier system. Menu names can vary by model and software version. Confirm account, outage, activation, lock, warranty and provisioning details in authorized carrier/manufacturer resources. Never record customer passwords, account PINs or full payment details here.</small>
+<div class="layout"><aside class="panel"><h3>Problem category</h3><select id="category" aria-label="Problem category"></select><p id="count" role="status"></p><div id="results" class="list" aria-label="Matching guides"></div></aside><article id="detail" aria-live="polite"></article></div>
+<footer>Independent reference tool. Confirm exact model, region, software and current carrier procedures. Menus vary. This tool cannot check accounts, outages, compatibility or activation status itself. Never store passwords, account PINs, IMEI/EID or customer records here.</footer>
 </main>
+<dialog id="editor"><form id="form"><h2>Add a scenario</h2><p>Check existing results first. Use one question or step per line.</p>
+<label>Title<input name="title" required maxlength="150"></label>
+<label>Category<select name="category"><option>Network</option><option>Calling</option><option>Messaging</option><option>SIM & Activation</option><option>Connectivity</option><option>Battery & Power</option><option>Data Transfer</option><option>Security</option></select></label>
+<label>Device<select name="device"><option>All devices</option><option>iPhone</option><option>Samsung</option><option>Google Pixel</option><option>Other Android</option></select></label>
+<label>Carrier<select name="carrier"><option>All carriers</option><option>T-Mobile</option><option>AT&amp;T</option><option>Verizon</option><option>Other carrier</option></select></label>
+<label>Symptoms<input name="symptoms" required></label><label>Diagnostic questions<textarea name="questions" required></textarea></label><label>Safe steps<textarea name="steps" required></textarea></label><label>Verify<textarea name="verify" required></textarea></label><label>Escalate when<textarea name="escalate" required></textarea></label><label>Customer explanation<textarea name="say" required></textarea></label><p id="formError" role="alert"></p><div class="actions"><button class="primary" type="submit">Save scenario</button><button type="button" id="cancel">Cancel</button></div></form></dialog>
 <script>
-  const allDevices=["iPhone","Samsung","Google Pixel","Other Android"];
-const data=[
-{id:"sos",name:"No service / SOS only",cat:"Network",devices:["iPhone","Samsung","Google Pixel","Other Android"],symptoms:"SOS only, No Service, Emergency calls only, no signal",questions:["Does the screen show SOS, No Service, or No SIM?","Does the problem happen everywhere or only in one location?","Did the customer recently change phones, SIMs, plans, or carriers?"],steps:["Turn Airplane Mode on for about 15 seconds, then turn it off.","Restart the phone.","Check whether the carrier reports an outage and confirm coverage at the location.","Confirm the line is active and eligible for service using authorized carrier tools.","Check that the intended SIM/eSIM line is enabled. On iPhone: Settings → Cellular. On many Android phones: Settings → Network & internet or Connections → SIM manager.","If using a physical SIM, power down before reseating it when the device maker recommends doing so. Inspect for visible damage.","If the issue began after activation or a device change, ask the carrier to verify SIM/eSIM provisioning. Do not delete an eSIM as an early troubleshooting step."],verify:"With Wi-Fi turned off, confirm the carrier name/signal appears and test an outgoing call, incoming call, SMS and mobile data.",escalate:"Persistent SOS/no service despite confirmed coverage and active line; suspected outage, damaged SIM, blocked/locked device, or failed provisioning.",say:"“I’m going to check whether this is a coverage issue, a SIM issue, or something that needs the carrier to refresh on the account.”"},
-{id:"calls",name:"Calls won't connect or ring",cat:"Calling",devices:["iPhone","Samsung","Google Pixel","Other Android"],symptoms:"Calls fail, go straight to voicemail, one-way audio, cannot receive calls",questions:["Can the customer make calls, receive calls, or neither?","Does it happen with every number or just one contact?","Can they send texts and use mobile data?"],steps:["Check signal and make sure Airplane Mode is off.","Restart the phone and try a call to a different number.","Check Focus/Do Not Disturb, blocked numbers and call screening settings.","On iPhone, review Settings → Apps → Phone (or Settings → Phone on some iOS versions) for call-related options.","On Android, open the Phone app → Settings and review blocked numbers, caller ID/spam and call forwarding where available.","If calls fail across numbers, have the carrier verify line status, calling features and network provisioning."],verify:"Place an outgoing test call and have a second phone call the customer's number.",escalate:"All calls fail with adequate coverage, repeated call drops across locations, or suspected carrier routing/provisioning issue.",say:"“Let’s test both an outgoing and incoming call so we can narrow down whether the issue is the phone, a setting, or the wireless line.”"},
-{id:"sms",name:"SMS, MMS or iMessage/RCS not sending",cat:"Messaging",devices:["iPhone","Samsung","Google Pixel","Other Android"],symptoms:"Text failed to send, pictures won't send, messages stuck, group messages missing",questions:["Are regular texts, picture messages, or internet-based messages failing?","Is it one contact, a group, or everyone?","Did the customer recently switch phones or platforms?"],steps:["Confirm the phone has cellular service; test a regular call.","Restart the device and try a new message to a known-good contact.","On iPhone, check Settings → Apps → Messages (or Settings → Messages on older iOS). Review iMessage and Send as SMS options.","On Android, open Google Messages → profile icon → Messages settings → RCS chats; menu wording may vary. Check RCS connection status.","Confirm the correct messaging app is the default on Android and check blocked contacts.","For picture/group messaging, confirm mobile data and carrier MMS support/settings; avoid guessing APN values.","If regular SMS fails for multiple contacts, ask the carrier to check messaging provisioning."],verify:"Send a plain SMS, then a picture/group message if relevant. Confirm replies arrive.",escalate:"SMS fails across contacts after basic checks, number porting is incomplete, or carrier messaging provisioning may be faulty.",say:"“I’ll separate regular carrier texts from iMessage or RCS, because they use different services and can fail for different reasons.”"},
-{id:"data",name:"Mobile data not working",cat:"Network",devices:["iPhone","Samsung","Google Pixel","Other Android"],symptoms:"No internet without Wi-Fi, apps won't load, 5G/LTE appears but data fails",questions:["Does data fail everywhere or only in one place?","Do calls and texts work?","Does Wi-Fi work normally?"],steps:["Turn Wi-Fi off to test cellular data on its own.","Confirm Cellular Data/Mobile Data is enabled. iPhone: Settings → Cellular. Android: Settings → Network & internet or Connections → Data usage/SIMs.","Check Airplane Mode, data limits, Data Saver/Low Data Mode and any app-specific data restrictions.","Restart the device and test a browser and a second app.","Check carrier outage/coverage and account data restrictions through authorized tools.","Do not change APN settings unless the carrier provides the exact current values for that plan/device."],verify:"With Wi-Fi disabled, load a website and use a second data-dependent app.",escalate:"Data remains unavailable with active service and confirmed coverage, or the carrier needs to review provisioning/network status.",say:"“I’m testing cellular data separately from Wi-Fi so we can tell whether the issue is with the phone or the wireless network.”"},
-{id:"esim",name:"eSIM won't download or activate",cat:"SIM & Activation",devices:["iPhone","Samsung","Google Pixel","Other Android"],symptoms:"Unable to activate eSIM, eSIM stuck activating, no cellular plan, QR code error",questions:["Is this a new line, an upgrade, or a transfer from another phone?","Is the old phone still active?","What exact error appears, and has the QR code or activation link already been used?"],steps:["Connect the phone to reliable Wi-Fi and install available system updates if practical.","Confirm the device is eSIM-compatible and not restricted by a carrier lock.","Find the EID and IMEI in device settings/about screen; share them only through authorized carrier processes.","iPhone: Settings → Cellular → Add eSIM. Android menu paths vary; Samsung commonly uses Settings → Connections → SIM manager → Add eSIM.","Follow the carrier's current activation flow. QR codes and transfer methods differ by carrier and may be single-use.","Do not delete an existing working eSIM until the replacement is confirmed active or the carrier directs the customer to do so.","If activation fails, have the carrier verify the line assignment and issue/refresh the correct activation method."],verify:"Confirm the correct number and carrier plan appear, then test calls, SMS and cellular data.",escalate:"Repeated activation errors, QR code already used, EID/IMEI mismatch, lock issue or carrier provisioning failure.",say:"“Before we remove or replace anything, let’s protect the working line and confirm the carrier has assigned the eSIM to the right 
-{
-id:"esim",
-name:"eSIM won't download or activate",
-cat:"SIM & Activation",
-devices:allDevices,
-symptoms:"Activation error, stuck activating, missing cellular plan or QR-code failure.",
-questions:[
-"Is this a new line, upgrade or replacement?",
-"Does the old phone still work?",
-"What exact error appears?"
-],
-steps:[
-"Connect to reliable Wi-Fi.",
-"Confirm the model supports eSIM and check carrier-lock status.",
-"Verify IMEI, EID and line assignment through authorized carrier tools.",
-"iPhone: Settings → Cellular → Add eSIM.",
-"Samsung: Settings → Connections → SIM manager → Add eSIM. Pixel: Settings → Network & internet → SIMs; follow the available add-SIM prompts.",
-"Follow the carrier's activation method. Some QR codes are single-use.",
-"Do not delete a working eSIM before replacement service is confirmed or the carrier directs it.",
-"Ask the carrier to refresh or reissue activation if needed."
-],
-verify:"Confirm the correct number and test calls, SMS and cellular data.",
-escalate:"Repeated activation errors, used QR code, identifier mismatch or carrier lock.",
-say:"Let’s protect the working line while we verify the new eSIM assignment."
-},
-{
-id:"wifi",
-name:"Phone won't connect to Wi-Fi",
-cat:"Connectivity",
-devices:allDevices,
-symptoms:"Unable to join, incorrect password, connected without internet or disconnections.",
-questions:[
-"Can other devices use this network?",
-"Can this phone use another network?",
-"What exact error appears?"
-],
-steps:[
-"Toggle Wi-Fi off and on.",
-"Restart the phone and, if appropriate, the router.",
-"Forget the network and reconnect with the confirmed password.",
-"iPhone: Settings → Wi-Fi → network info → Forget This Network. Android: open the network's settings and choose Forget.",
-"Check VPN, private DNS and any required network sign-in page.",
-"Check for available software updates.",
-"Before resetting network settings, explain which saved connections and settings will be removed."
-],
-verify:"Reconnect and open multiple websites or apps.",
-escalate:"Other devices also fail on this network, or this phone fails on multiple known-good networks.",
-say:"We’ll compare devices and networks to see where the issue follows."
-},
-{
-id:"battery",
-name:"Battery drains unusually fast",
-cat:"Battery & Power",
-devices:allDevices,
-symptoms:"Rapid battery loss, unusual warmth or unexpected shutdowns.",
-questions:[
-"Did this start after an update or app install?",
-"Does it happen while idle?",
-"Is there swelling, damage or extreme heat?"
-],
-steps:[
-"Check Settings → Battery for usage details; Android menu wording varies.",
-"Look for unusually high app or background usage.",
-"Update the affected app or review its background activity.",
-"Review screen brightness, location use and hotspot activity.",
-"Restart and check system updates.",
-"Check battery health if the model supports it.",
-"If swollen, stop using and charging the device and arrange professional service. Do not press or puncture it."
-],
-verify:"Monitor normal use and confirm unusual heat or shutdowns have stopped.",
-escalate:"Swelling, smoke, burning smell, extreme heat or repeated shutdowns.",
-say:"We’ll check what is consuming power before deciding whether the battery needs service."
-},
-{
-id:"charging",
-name:"Phone won't charge",
-cat:"Battery & Power",
-devices:allDevices,
-symptoms:"No charging indicator, intermittent charging or moisture warning.",
-questions:[
-"Have a different compatible cable and adapter been tested?",
-"Is there a moisture or temperature warning?",
-"Was the phone damaged or exposed to liquid?"
-],
-steps:[
-"Try a known-good compatible cable, adapter and wall outlet.",
-"Inspect the port with a light. Do not insert metal objects or scrape contacts.",
-"For a moisture warning, disconnect power and follow manufacturer drying instructions. Do not use heat.",
-"Restart only if the device is safe, dry and not unusually hot.",
-"Try wireless charging only if supported and the phone is dry and undamaged.",
-"Arrange approved diagnostics if charging still fails."
-],
-verify:"Confirm steady charging without unusual heat.",
-escalate:"Damaged port, liquid exposure, swelling, burning smell or failure with known-good accessories.",
-say:"Let’s rule out the charging accessories and inspect the phone safely."
-},
-{
-id:"iphone-iphone",
-name:"Transfer iPhone to iPhone",
-cat:"Data Transfer",
-devices:["iPhone"],
-symptoms:"Moving apps, photos, messages and settings to a new iPhone.",
-questions:[
-"Is the new iPhone on its setup screen?",
-"Can the old iPhone be unlocked?",
-"Is there a recent backup and enough storage?"
-],
-steps:[
-"Back up the old iPhone: Settings → customer name → iCloud → iCloud Backup → Back Up Now.",
-"Connect the old iPhone to Wi-Fi, enable Bluetooth and power both phones.",
-"Place the new iPhone beside the unlocked old phone.",
-"Follow Quick Start and verify the animation or code.",
-"Follow Apple Account and device setup prompts.",
-"Choose direct transfer or an iCloud restore when offered.",
-"Keep devices close and powered until transfer finishes.",
-"Activate the SIM/eSIM separately as required. Do not erase the old phone before verification."
-],
-verify:"Check contacts, photos, messages and important apps. Test calls and cellular data.",
-escalate:"Quick Start fails, account recovery is needed or the backup cannot restore.",
-say:"We’ll use Quick Start and keep your old phone intact until the important information is checked.",
-sources:[
-["Apple Quick Start","https://support.apple.com/en-us/102659"]
-]
-},
-{
-id:"samsung-samsung",
-name:"Transfer Samsung to Samsung",
-cat:"Data Transfer",
-devices:["Samsung"],
-symptoms:"Moving information from an older Galaxy to a new Galaxy.",
-questions:[
-"Can both phones be unlocked?",
-"Is a compatible cable available?",
-"Is the new phone already set up?"
-],
-steps:[
-"Charge both phones and update Smart Switch if needed.",
-"On the new Galaxy, search Settings for Smart Switch.",
-"Choose Receive data → Galaxy/Android and select Cable or Wireless.",
-"On the old Galaxy, open Smart Switch and choose the sending option.",
-"Connect with the chosen method and approve prompts.",
-"Select the categories to transfer.",
-"Keep both devices connected and powered until completion.",
-"Reopen important apps and sign in as needed. Do not erase the old phone yet."
-],
-verify:"Check contacts, messages, photos, files and key apps. Test carrier service separately.",
-escalate:"Detection fails, transfer stops repeatedly or required app data is unsupported.",
-say:"Smart Switch can copy much of your information, and we’ll review what arrived.",
-sources:[
-["Samsung Smart Switch","https://www.samsung.com/us/support/answer/ANS10001345/"]
-]
-},
-{
-id:"android-pixel",
-name:"Transfer Android to Google Pixel",
-cat:"Data Transfer",
-devices:["Google Pixel"],
-symptoms:"Moving data from an Android phone to a new Pixel.",
-questions:[
-"What is the old phone model?",
-"Can both phones be unlocked?",
-"Is there a Google backup and enough storage?"
-],
-steps:[
-"Back up the old phone and sync important Google data.",
-"Back up WhatsApp within WhatsApp if its chats are needed.",
-"Charge both phones and connect to Wi-Fi.",
-"During Pixel setup, choose the option to copy apps and data.",
-"Use the cable or wireless pairing method offered by the Pixel.",
-"Select data categories and keep devices connected until finished.",
-"If setup is complete, check supported post-setup transfer options before considering any reset.",
-"Complete SIM/eSIM activation separately and preserve the old phone."
-],
-verify:"Review contacts, photos, texts, apps, account sync and any WhatsApp restore.",
-escalate:"Pairing repeatedly fails, storage is insufficient or required data cannot restore.",
-say:"We’ll use this Pixel’s supported transfer method and check the important data afterward.",
-sources:[
-["Google Pixel transfer","https://support.google.com/pixelphone/answer/7129955"]
-]
-},Part 3 of 3. Copy and paste this at the end of Part 2, after its final comma.
-
-Then tap Commit changes…, choose Commit directly to the main branch, and confirm Commit changes.
-
-{
-id:"android-iphone",
-name:"Transfer Android to iPhone",
-cat:"Data Transfer",
-devices:["iPhone"],
-symptoms:"Switching from Android to iPhone with contacts, messages and photos.",
-questions:[
-"Is the iPhone still in initial setup?",
-"Can the Android phone run Move to iOS?",
-"Will the selected content fit?"
-],
-steps:[
-"Back up important Android data and connect both phones to power.",
-"Turn on Android Wi-Fi.",
-"During iPhone setup, go to Transfer Your Apps & Data → From Android.",
-"Open Apple's Move to iOS app on Android.",
-"Enter the code shown on the iPhone and select content.",
-"Keep Move to iOS open and both devices nearby until the iPhone progress bar finishes.",
-"If iPhone setup is already complete, consider manual transfer. Restarting setup requires erasing the iPhone; obtain consent and verify its backup first.",
-"Finish setup, install remaining apps and activate carrier service separately."
-],
-verify:"Check contacts, messages, photos, calendars and supported chat history. Test calls.",
-escalate:"Repeated disconnects, insufficient storage or existing iPhone data that must be preserved.",
-say:"Move to iOS can transfer many items. We’ll check your important information and set up remaining apps separately.",
-sources:[
-["Apple Move to iOS","https://support.apple.com/en-us/118670"]
-]
-},
-{
-id:"iphone-samsung",
-name:"Transfer iPhone to Samsung Galaxy",
-cat:"Data Transfer",
-devices:["Samsung"],
-symptoms:"Moving iPhone information to a Galaxy using Smart Switch.",
-questions:[
-"Can the iPhone be unlocked?",
-"Is a compatible cable available?",
-"Can the customer access their Apple Account if using iCloud?"
-],
-steps:[
-"Back up the iPhone and confirm important data is saved.",
-"Open Smart Switch on Galaxy.",
-"Choose Receive data → iPhone/iPad.",
-"For cable transfer, connect the devices and tap Trust on iPhone if prompted.",
-"For iCloud transfer, choose Get data from iCloud and let the customer complete sign-in and verification privately.",
-"Select supported categories and start transfer.",
-"Follow any separate WhatsApp migration prompts.",
-"After moving the number away from iPhone, turn off iMessage for that number. Keep the old phone until verification."
-],
-verify:"Review contacts, photos, calendars, supported messages and apps. Test calls and SMS.",
-escalate:"Account verification fails, the phone cannot be detected or required data is unsupported.",
-say:"We’ll choose a supported transfer method and check which information came across.",
-sources:[
-["Samsung Smart Switch","https://www.samsung.com/us/support/answer/ANS10001345/"]
-]
-},
-{
-id:"iphone-android",
-name:"Transfer iPhone to other Android",
-cat:"Data Transfer",
-devices:["Other Android","Google Pixel"],
-symptoms:"Moving from iPhone to a non-Samsung Android phone.",
-questions:[
-"What is the receiving phone's exact model?",
-"Is it still in setup?",
-"Is a compatible cable available?"
-],
-steps:[
-"Identify the receiving phone's official migration method.",
-"Back up the iPhone and save important contacts and photos.",
-"During Android setup, choose the offered iPhone data-copy option.",
-"Use the cable or wireless method shown on screen.",
-"Unlock iPhone and approve Trust if prompted.",
-"Select supported categories and keep devices connected.",
-"If setup is already complete, check manufacturer-supported transfer options before considering a reset.",
-"Activate carrier service separately and turn off iMessage for the transferred number."
-],
-verify:"Check contacts, photos, supported messages, calendars and key apps. Test calls, SMS and data.",
-escalate:"Pairing fails repeatedly, required categories are unsupported or account recovery is needed.",
-say:"We’ll follow the transfer process for this exact Android model and verify your important information.",
-sources:[
-["Google Android switching guide","https://support.google.com/android/answer/6193424"]
-]
-},
-{
-id:"activation",
-name:"New phone won't activate",
-cat:"SIM & Activation",
-devices:allDevices,
-symptoms:"Activation failed, missing phone number or no carrier connection.",
-questions:[
-"Is this a new line, upgrade, replacement or BYOD?",
-"Does the old phone still work?",
-"What exact error appears?"
-],
-steps:[
-"Connect to reliable Wi-Fi.",
-"Confirm device compatibility and carrier-lock status.",
-"Verify device identifiers and SIM/eSIM assignment using authorized carrier tools.",
-"Follow the carrier's activation process.",
-"Restart after provisioning is confirmed.",
-"For a number transfer, check port status. Do not cancel old service before the transfer completes."
-],
-verify:"Confirm the correct number and test incoming/outgoing calls, SMS and mobile data.",
-escalate:"Identifier rejection, account mismatch, incomplete port, carrier lock or provisioning failure.",
-say:"I’ll verify the device and line, complete activation and test each service."
-}
-];
-const categories=[
-"All problems",
-"Network",
-"Calling",
-"Messaging",
-"SIM & Activation",
-"Connectivity",
-"Battery & Power",
-"Data Transfer"
-];
-let selected="sos";
-let activeCategory="All problems";
+'use strict';
+const devices=['iPhone','Samsung','Google Pixel','Other Android'];
+const carriers=['T-Mobile','AT&T','Verizon','Other carrier'];
+const groups=['Network','Calling','Messaging','SIM & Activation','Connectivity','Battery & Power','Data Transfer','Security'];
+const sources={
+apple:['Apple iPhone support','https://support.apple.com/iphone'],
+quick:['Apple Quick Start','https://support.apple.com/en-us/102659'],
+move:['Apple Move to iOS','https://support.apple.com/en-us/118670'],
+activation:['Apple activation help','https://support.apple.com/en-us/109326'],
+galaxy:['Samsung Smart Switch','https://www.samsung.com/us/support/answer/ANS10001345/'],
+pixel:['Google Pixel transfers','https://support.google.com/pixelphone/answer/7129955'],
+android:['Google Android transfers','https://support.google.com/android/answer/6193424'],
+tmobile:['T-Mobile troubleshooting','https://www.t-mobile.com/support/phones-tablets-devices/troubleshooting']
+};
+const serviceVerify='With Wi-Fi off, test outgoing and incoming calls, a plain SMS and reply, then a website over cellular. Do not make a test emergency call.';
+const transferVerify='Compare contacts, recent photos/videos, messages and important files. Open essential apps and verify account recovery/authenticator access. Test calls, SMS and cellular data separately. Keep the old phone intact until the customer confirms important data.';
+const seed=[];
+function add(id,title,category,models,symptoms,questions,steps,verify,escalate,say,refs=[]){seed.push({id,title,category,devices:models,carriers:carriers.slice(),symptoms,questions,steps,verify,escalate,say,refs});}
+add('sos','No service / SOS / Emergency calls only','Network',devices,
+'No signal, SOS, emergency calls only, no network',
+['Can it make a regular call?','Everywhere or one location?','Any recent SIM, device, carrier or account change?'],
+['Turn Airplane mode on for 15 seconds, then off. Restart.','Check carrier outage/coverage and confirm the line is active through authorized tools.','Check that the intended SIM line is enabled using the model paths below.','For physical SIM detection errors, use the SIM guide. For a recent device change, have the carrier verify SIM assignment and provisioning. Do not delete an eSIM.'],
+serviceVerify,'Persistent failure with known coverage and active line; SIM, account, lock or hardware fault.','I’ll check coverage, the SIM and the wireless line to see where the connection is failing.',['tmobile']);
+add('calls','Calls fail / phone does not ring','Calling',devices,
+'Calls fail, straight to voicemail, no ringing, dropped calls',
+['Outgoing, incoming or both?','Every caller or one number?','Do texts and cellular data work?'],
+['Check signal, Airplane mode and restart.','Check ring volume, Focus/Do Not Disturb and blocked numbers.','Review Phone app settings for call screening and forwarding. iPhone: Settings → Apps → Phone, or Settings → Phone on older versions.','If all calls fail, have the carrier check line status, calling features and provisioning.'],
+'Test an outgoing call and an incoming call from another phone; confirm ringing and two-way audio.','Repeated failures across locations, routing issues or hardware/audio failure.','Let’s test both directions and check settings before asking the carrier to investigate.',['tmobile']);
+add('sms','SMS / MMS / iMessage / RCS failure','Messaging',devices,
+'Text failed, picture message fails, message blocking active, missing texts',
+['Plain SMS, pictures, RCS or iMessage?','One number or every number?','Exact error? Can calls and cellular data work?'],
+['Test a plain text to two known-good numbers and ask for replies. Check blocked contacts.','For message blocking active, check both sending and receiving lines for carrier messaging restrictions and account status. Do not assume which line is blocked from one test.','Android: confirm the default SMS app under Settings → Apps → Default apps → SMS app. Check Google Messages → profile → Messages settings → RCS chats.','iPhone: Settings → Apps → Messages, or Settings → Messages on older versions. Check iMessage number registration.','If switching platforms, address old iMessage/RCS registration. If SMS fails across contacts, request carrier messaging provisioning checks. Do not clear message storage.'],
+'Send and receive plain SMS first, then test pictures/groups and RCS/iMessage if used.','All-contact SMS failure, persistent blocking, incomplete port or carrier provisioning issue.','I’ll separate carrier texts from internet messaging and check whether a line restriction is involved.',['tmobile']);
+add('data','Mobile data / Google says not connected','Network',devices,
+'No internet without Wi-Fi, browser offline, LTE but no data',
+['Does a regular call work?','Does Wi-Fi internet work?','Every app or just one? Any data-limit message?'],
+['Turn Wi-Fi off to isolate cellular data. Check Airplane mode is off.','Enable Mobile/Cellular data for the intended line. Check data limits and app data restrictions.','Restart and test two apps. Check carrier outages, account status and data restrictions.','If only one app fails, update it and review permissions/restrictions. Use only current carrier APN values or its approved reset-to-default procedure.'],
+'With Wi-Fi off, load two websites or apps; separately test calls and plain SMS.','Data fails across apps with active line and coverage, or carrier provisioning needs review.','We’ll test the mobile connection separately from Wi-Fi and check whether this affects one app or the whole line.',['tmobile']);
+add('esim','eSIM activation / download failure','SIM & Activation',devices,
+'eSIM stuck activating, QR error, cannot add cellular plan',
+['New line, upgrade or replacement?','Exact model and region? Does it support carrier eSIM?','Is the old line working? Has the QR code been used?'],
+['Connect to trusted Wi-Fi. Confirm exact-model eSIM compatibility and carrier-lock status.','Have the carrier verify device EID/IMEI and line assignment through authorized tools; do not save identifiers here.','Use the model Add eSIM path below and the carrier-approved transfer, QR or activation-notification method. QR codes may be single-use.','Keep the working profile until the carrier directs a change. Do not delete eSIM to troubleshoot a download error.'],
+serviceVerify,'Repeated download errors, consumed QR code, unsupported device, identity mismatch or provisioning failure.','We’ll confirm the correct line is assigned before changing the working SIM.',['tmobile']);
+add('esim-replace','Replace eSIM / move service to replacement','SIM & Activation',devices,
+'Deleted eSIM, lost phone, replacement device, SIM swap',
+['Old phone available for verification?','Account owner or authorized user present?','Replacement model accepted by carrier?'],
+['Connect replacement to trusted Wi-Fi; keep the old phone accessible if available.','Complete carrier identity verification and any SIM-change protection requirements. Use approved alternate verification if the phone is lost.','Ask the carrier to authorize assignment to the replacement EID/IMEI and provide the correct activation method.','Add the eSIM using the receiving model path. Old-device service may stop at activation. Never use an unknown QR code or bypass identity checks.'],
+serviceVerify,'Identity check fails, SIM-change restriction, lost-device security issue or repeated activation failure.','We’ll securely move your number and check the new phone before removing anything else.',['tmobile']);
+add('sim','No SIM / invalid SIM / physical SIM replacement','SIM & Activation',devices,
+'No SIM, invalid SIM, SIM not detected, damaged tray',
+['Physical SIM or eSIM?','Did this start after damage or a swap?','SIM not detected, or detected but no service?'],
+['Restart and check whether the SIM appears in settings. Confirm this regional model has a SIM tray.','Follow manufacturer power-off/tray instructions before reseating. Use the correct tool and avoid microphone holes. Do not force the tray or cut a SIM.','Inspect for visible SIM/tray damage. For eSIM-only devices use the eSIM guide.','Have the carrier assign and activate a replacement SIM if needed. A new SIM is not automatically active.'],
+serviceVerify,'Tray/reader damage, persistent detection fault, carrier lock or provisioning error.','I’ll check whether the phone can read the SIM, then confirm the carrier has activated it.',['tmobile']);
+add('compat','BYOD compatibility / carrier lock','SIM & Activation',devices,
+'IMEI rejected, SIM not supported, imported or locked phone',
+['Exact model number and purchase country?','Target carrier and SIM type?','Original carrier lock or lost/stolen restriction?'],
+['Find model information in About phone. Use the target carrier’s official IMEI compatibility checker; model name alone is insufficient.','iPhone: Settings → General → About → Carrier Lock. On Android, check lock status with the original carrier using its approved method.','Confirm regional SIM/eSIM and calling support. Unlocked does not guarantee network compatibility.','Refer unlocking or a device block to the carrier that owns the restriction; never bypass security.'],
+'Target carrier accepts the device and SIM type; after activation, complete call, SMS and cellular data tests.','Rejected IMEI, unsupported model, ownership dispute or unresolved lock/block.','I’ll check this exact device before moving your service.',['tmobile']);
+add('activation','New phone / replacement will not activate','SIM & Activation',devices,
+'Activation failed, missing number, incomplete port',
+['New line, upgrade, BYOD or replacement?','Old service still active?','What exact error appears?'],
+['Connect to Wi-Fi and distinguish device setup from cellular activation.','Confirm carrier compatibility, lock status and account authorization.','Have the carrier verify device and SIM/eSIM assignment and complete its line-specific activation process.','For number ports, check status with the gaining carrier; do not cancel old service before completion. Restart after provisioning is confirmed.'],
+serviceVerify,'Incomplete port, device rejection, account mismatch or persistent provisioning error.','I’ll check device setup and line activation separately, then test all services.',['tmobile']);
+add('iphone-activation','iPhone activation / Hello screen errors','SIM & Activation',['iPhone'],
+'Unable to activate, server unavailable, SIM not supported, Activation Lock',
+['Exact activation message?','Server error, unsupported SIM or previous owner account?','Carrier line already activated?'],
+['Connect to reliable Wi-Fi, restart and check Apple System Status for activation outages. Retry later if the server is unavailable.','SIM not supported: check carrier lock and eligibility with the carrier.','Activation Lock requires the owner’s Apple Account or Apple’s approved proof-of-purchase process. Never bypass the lock.','Follow official Apple activation help. Do not restore/erase without consent and a verified backup. Handle carrier provisioning separately.'],
+'Complete setup and confirm the intended Apple Account, then test calls, SMS and cellular data.','Activation Lock, repeated Apple activation errors or unresolved carrier restriction.','I’ll identify whether Apple setup or wireless service activation is stopping the phone.',['activation']);
+add('wifi','Wi-Fi will not connect / no internet','Connectivity',devices,
+'Incorrect password, unable to join, Wi-Fi without internet',
+['Other devices work on this network?','Phone works on another Wi-Fi?','Password error or connected without internet?'],
+['Toggle Wi-Fi and restart the phone. Restart the router only with the owner’s permission.','Confirm the password before forgetting and rejoining the network.','Check for a captive-portal sign-in. With permission, temporarily disconnect a VPN or review Private DNS if relevant; restore settings after testing.','If multiple devices fail, refer to the router/ISP. A network reset is a later step: explain saved Wi-Fi/passwords and other network settings may be removed before consent.'],
+'Connect and load more than one site/app; compare another known-good network.','Phone fails across known-good networks or router/ISP outage is suspected.','We’ll check whether the problem follows this phone or stays with the Wi-Fi network.',['tmobile']);
+add('battery','Battery drains fast / gets hot','Battery & Power',devices,
+'Rapid battery loss, heat, shutdowns, swollen battery',
+['Idle or during use? After an update/app install?','Any swelling, damage or unusual heat?'],
+['If swollen, smoking or dangerously hot, stop charging/use and arrange professional service. Do not press, puncture or handle a smoking device.','Check Settings → Battery for app usage. Update or restrict a clearly excessive app when appropriate.','Review brightness, hotspot, location use and weak-signal conditions; restart.','Check battery health where supported and compare normal-use drain after updates finish.'],
+'Battery holds charge through a representative usage period without abnormal heat or shutdowns.','Swelling, smoke, burning smell, extreme heat or repeated shutdowns.','I’ll check power usage before assuming the battery needs replacement.',['apple']);
+add('charge','Phone will not charge / moisture warning','Battery & Power',devices,
+'No charging, intermittent charging, moisture alert',
+['Known-good compatible cable and adapter tried?','Liquid, impact, heat or swelling?'],
+['Stop charging if the device is wet, swollen or abnormally hot. Follow manufacturer drying/service guidance.','Test a known-good compatible cable, wall adapter and outlet if safe.','Inspect the port with a light. Do not insert metal, scrape contacts, use heat or place the phone in rice.','Restart if safe. Test wireless charging only on a supported model that is dry and undamaged.'],
+'Charge rises steadily using compatible accessories without abnormal heat.','Damaged port, liquid exposure, swelling or persistent failure with known-good accessories.','We’ll rule out the charger first and check the phone without risking port damage.',['apple']);
+function transfer(id,title,models,symptoms,questions,steps,escalate,say,refs){add(id,title,'Data Transfer',models,symptoms,questions,steps,transferVerify,escalate,say,refs);}
+transfer('ii','iPhone → iPhone: Quick Start',['iPhone'],'Old iPhone to new iPhone, Quick Start, restore',
+['New iPhone still at setup?','Can the customer unlock the old phone and access Apple Account?','Enough storage and recent backup?'],
+['Back up the old iPhone and confirm backup date. Turn on Wi-Fi/Bluetooth and power both phones.','Place the new iPhone near the unlocked old iPhone and follow Quick Start pairing prompts.','Choose direct transfer or iCloud restore as offered. Direct transfer occupies both devices; cloud content may continue downloading afterward.','Keep devices powered and nearby. Activate the cellular line separately; protect the old phone until verification.'],
+'Pairing fails repeatedly, backup missing, storage shortage or Apple Account recovery needed.','We’ll copy your information and keep the old phone intact until we check it together.',['quick']);
+transfer('ss','Samsung → Samsung: Smart Switch',['Samsung'],'Old Galaxy to new Galaxy, Smart Switch',
+['Old Galaxy unlocks?','Cable or wireless? Enough storage?'],
+['Back up first, charge both devices and update Smart Switch if needed.','New Galaxy: search Settings for Smart Switch → Receive data → Galaxy/Android. Choose cable or wireless.','Old Galaxy: Smart Switch → Send data; match the method and approve connection. Use a compatible data cable if wired.','Select supported content, start transfer and keep phones connected. Reinstall/sign in to protected apps separately.'],
+'Transfer repeatedly stops, source inaccessible or required protected app data cannot move.','Smart Switch can copy supported content; we’ll verify the important items afterward.',['galaxy']);
+transfer('as','Pixel / other Android → Samsung',['Samsung'],'Android to Galaxy, receive Android data',
+['Exact old Android model?','Smart Switch supported? Enough storage?'],
+['Back up the old Android and charge both phones.','On Galaxy open Smart Switch → Receive data → Galaxy/Android.','Use Samsung’s official Smart Switch on the old Android where supported. Follow cable/wireless prompts and permissions.','Select content and wait for completion. Move app-specific backups and SIM service separately.'],
+'Unsupported source, repeated disconnects, locked/damaged source or missing protected content.','We’ll use the Galaxy’s supported copy method and check what can move.',['galaxy']);
+transfer('ap','Android → Google Pixel',['Google Pixel'],'Android or old Pixel to new Pixel',
+['Pixel generation and Android versions?','Setup complete or not?','Old phone unlocked and backed up?'],
+['Back up source data, check storage and charge both phones.','During Pixel setup choose Copy apps & data; connect a compatible data cable or use the offered wireless method.','Unlock the source, approve prompts and select supported categories. Keep both devices connected.','Post-setup copying varies. Pixel 9 and later offer some additional transfer options; consult the exact model’s instructions before considering any reset.'],
+'Pairing repeatedly fails, storage shortage or required backup/account cannot be accessed.','The transfer options depend on this Pixel generation, so we’ll follow what its setup supports.',['pixel']);
+transfer('ai','Android → iPhone: Move to iOS',['iPhone'],'Android to iPhone, Move to iOS',
+['iPhone still in initial setup?','Android unlocks and selected content fits?','Any existing iPhone data to preserve?'],
+['Back up Android and power both devices. Follow Apple’s supported wired/wireless Move to iOS method for these models.','On iPhone setup choose Transfer Your Apps & Data → From Android. Open Apple’s Move to iOS on Android and enter the pairing code.','Select content and keep Move to iOS open until the iPhone progress bar completes. Do not interrupt the source.','If the iPhone is already set up, standard Move to iOS needs setup again. Do not erase without explicit consent and a verified backup; offer manual transfer. Some media/apps need separate migration.'],
+'Repeated transfer failure, insufficient storage or customer needs to preserve an already-set-up iPhone.','We’ll move supported information and identify apps or files that need separate setup.',['move']);
+transfer('is','iPhone → Samsung Galaxy',['Samsung'],'iOS to Galaxy, Smart Switch, iCloud',
+['iPhone unlocks and Apple Account accessible?','Compatible cable or supported iCloud route?','WhatsApp or other app history essential?'],
+['Back up the iPhone. On Galaxy open Smart Switch → Receive data → iPhone/iPad.','For cable: connect compatible USB-C/Lightning data cable and tap Trust on iPhone. For supported iCloud import: follow customer-entered sign-in/verification prompts.','Select supported categories and transfer. Cable and iCloud routes support different content; inspect the offered list.','Turn off iMessage for the moved number when switching away from iPhone; review FaceTime too. Use a supported WhatsApp-specific migration if needed.'],
+'Apple Account recovery needed, cable not detected or required category unsupported.','We’ll choose the transfer method that supports your important content and verify it.',['galaxy']);
+transfer('ip','iPhone → Google Pixel',['Google Pixel'],'iOS to Pixel, Android Switch, iPhone copy',
+['Exact Pixel generation and setup state?','Compatible data cable available?','WhatsApp or authenticator access needed?'],
+['Back up the iPhone and check receiving storage. Start Pixel setup and select copy from iPhone.','Follow the offered cable/wireless route. A supported cable generally copies more categories. Unlock iPhone and tap Trust if requested.','Select offered content and keep both phones powered. Post-setup options differ by Pixel generation; consult model instructions first.','Turn off iMessage for the moved number and review FaceTime. Migrate WhatsApp/authenticators through their specific supported procedures; activate service separately.'],
+'Repeated copy failures, unavailable category, account recovery or insufficient storage.','We’ll follow this Pixel’s transfer options and check the apps that need separate setup.',['pixel']);
+transfer('io','iPhone → other Android',['Other Android'],'iOS to Motorola or other Android',
+['Exact receiving brand, model and software?','Initial setup or already configured?','Source unlocks and backup available?'],
+['Check the receiving manufacturer’s official iPhone migration instructions; back up first.','During Android setup choose copy from iPhone if offered. Use the compatible data cable or official wireless method shown.','Unlock the iPhone, approve Trust/pairing and select supported content. Do not assume all chats or paid apps can migrate.','For a configured destination, check supported post-setup options before a consented, backed-up reset. Turn off old iMessage registration and activate service separately.'],
+'Unsupported transfer route/category, damaged source or repeated pairing failure.','The steps depend on the Android model, so we’ll use its approved method.',['android']);
+transfer('aa','Android → other Android',['Other Android'],'Old Android to Motorola or other Android',
+['Exact receiving model and setup state?','Google backup and source unlock available?'],
+['Back up source data and app-specific information. Charge both phones and check storage.','During receiving setup choose Copy apps & data. Use a compatible cable or official wireless pairing method.','Unlock source, approve copy and select categories. Let copying complete without interruption.','If setup is finished, use supported manufacturer post-setup options first. Do not reset without consent and backup. Restore protected apps and activate SIM separately.'],
+'Unsupported source, failed pairing, insufficient storage or missing backup.','We’ll copy supported information, then check essential apps and service separately.',['android']);
+add('security','Virus warnings / pop-ups / suspicious apps','Security',devices,
+'Virus alert, browser pop-ups, scam calendar, unwanted app',
+['Warning only on a website or throughout the phone?','Any recently installed app or downloaded profile?','Was a password or payment shared?'],
+['Do not call numbers, pay or install software advertised in a pop-up. Close the suspicious tab.','Android: inspect recent apps and browser site-notification permissions; use Play Store → profile → Play Protect. Do not install random cleaners.','iPhone: review Safari website notifications/settings, unknown calendar subscriptions and Settings → General → VPN & Device Management. Do not remove work-managed profiles without administrator approval.','If credentials were exposed, use a trusted device to secure the affected account and review sessions. Contact the bank directly if payment information was shared.'],
+'Reopen the browser and trusted apps; confirm warnings stop and affected accounts are secured.','Persistent device-wide behavior, unknown management, account takeover or financial loss.','We’ll identify where the warning comes from and remove its cause safely.',['apple','tmobile']);
+const carrierNotes={
+'T-Mobile':['Confirm active line, permissions and SIM-change protection through authorized T-Mobile tools. Follow the current activation flow for this line.','https://www.t-mobile.com/support/devices/sim-esim'],
+'AT&T':['Use the AT&T process for the account type. Prepaid, business, BYOD and postpaid flows can differ. Confirm device/SIM eligibility and authorization.','https://www.att.com/support/article/wireless/KM1455633/'],
+'Verizon':['Use Verizon’s flow for the exact account and device. Standard monthly and prepaid activation instructions can differ.','https://www.verizon.com/support/esim-activation-instructions/'],
+'Other carrier':['Confirm the actual provider, including MVNO. Use its own account and activation process; the host network may not manage this line.','']
+};
+const modelNotes={
+iPhone:'Settings → General → About: model/software. Settings → Cellular: enabled lines and data. Add eSIM appears only where supported.',
+Samsung:'Settings → About phone: exact model. Settings → Connections → SIM manager: supported SIM/eSIM controls. Mobile data may be under Connections → Data usage.',
+'Google Pixel':'Settings → About phone: model/software. Settings → Network & internet → SIMs: line/data and Add SIM / Set up an eSIM where supported.',
+'Other Android':'Identify brand/model/software in Settings → About phone. Motorola commonly uses Network & internet → Mobile network or SIMs and mobile network. Other brands vary; search Settings and confirm manufacturer instructions.'
+};
 const $=id=>document.getElementById(id);
-function escapeHTML(value){
-return String(value).replace(/[&<>"']/g,char=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#39;"
-}[char]));
+const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const normalize=v=>String(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+function readStore(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback;}catch{return fallback;}}
+function writeStore(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{$('status').textContent='Browser storage unavailable. Export a backup before leaving.';return false;}}
+function valid(x){return x&&['id','title','category','symptoms','verify','escalate','say'].every(k=>typeof x[k]==='string'&&x[k].trim())&&groups.includes(x.category)&&['devices','carriers','questions','steps'].every(k=>Array.isArray(x[k])&&x[k].length&&x[k].every(v=>typeof v==='string'&&v.trim()))&&x.devices.every(v=>devices.includes(v))&&x.carriers.every(v=>carriers.includes(v));}
+let custom=readStore('cmhq-custom-v3',[]);custom=Array.isArray(custom)?custom.filter(valid):[];
+const accepted=[];for(const x of custom){if(![...seed,...accepted].some(a=>a.id===x.id||normalize(a.title)===normalize(x.title)))accepted.push(x);}custom=accepted;
+let favorites=readStore('cmhq-favorites-v3',[]);favorites=new Set(Array.isArray(favorites)?favorites:[]);
+let selected='sos';
+let checked={};
+function all(){return [...seed,...custom];}
+function matches(){const words=$('search').value.toLowerCase().trim().split(/\s+/).filter(Boolean);return all().filter(x=>($('category').value==='All categories'||x.category===$('category').value)&&($('device').value==='All devices'||x.devices.includes($('device').value))&&($('carrier').value==='All carriers'||x.carriers.includes($('carrier').value))&&(!$('savedOnly').checked||favorites.has(x.id))&&words.every(w=>[x.title,x.symptoms,...x.questions,...x.steps].join(' ').toLowerCase().includes(w)));}
+function clearFilters(){$('search').value='';$('device').value='All devices';$('carrier').value='All carriers';$('category').value='All categories';$('savedOnly').checked=false;}
+function list(values){return values.map(v=>'<li>'+escapeHTML(v)+'</li>').join('');}
+function currentCarrierNotes(){const c=$('carrier').value;return c==='All carriers'?Object.entries(carrierNotes):[[c,carrierNotes[c]]];}
+function guideText(x){return [x.title,'Devices: '+x.devices.join(', '),'Carrier: '+$('carrier').value,'Symptoms: '+x.symptoms,'Questions:',...x.questions.map((v,i)=>(i+1)+'. '+v),'Model paths:',...x.devices.map(d=>d+': '+modelNotes[d]),'Safe steps:',...x.steps.map((v,i)=>(i+1)+'. '+v),'Verify: '+x.verify,'Escalate: '+x.escalate,'Customer explanation: '+x.say,'Carrier guidance:',...currentCarrierNotes().map(([n,v])=>n+': '+v.join(' ')),...(x.refs||[]).filter(k=>sources[k]).map(k=>sources[k].join(': '))].join('\n');}
+function render(){const found=matches();if(!found.some(x=>x.id===selected))selected=found[0]?.id;$('count').textContent=found.length+' matching guides · '+all().length+' total';$('results').replaceChildren();for(const x of found){const b=document.createElement('button');b.textContent=(favorites.has(x.id)?'★ ':'')+x.title;b.className=x.id===selected?'active':'';b.setAttribute('aria-pressed',String(x.id===selected));b.onclick=()=>{selected=x.id;render();};$('results').appendChild(b);}if(!found.length){$('detail').innerHTML='<h2>No matching guides</h2><p>Clear filters or use fewer search words. You can add a new scenario if it is missing.</p>';return;}
+const x=found.find(v=>v.id===selected),e=escapeHTML;
+const paths=$('device').value==='All devices'?x.devices:[$('device').value];
+$('detail').innerHTML='<div class="muted">'+e(x.category)+(custom.includes(x)?' · Custom':' · Field guide')+'</div><h2>'+e(x.title)+'</h2>'+x.devices.map(v=>'<span class="pill">'+e(v)+'</span>').join('')+'<span class="pill">'+e($('carrier').value)+'</span><div class="actions"><button id="save" class="primary">'+(favorites.has(x.id)?'★ Saved — remove':'☆ Save guide')+'</button><button id="copy">Copy guide</button><button id="print">Print / Save PDF</button><button id="resetChecks">New customer / clear checks</button>'+(custom.includes(x)?'<button id="delete">Delete custom guide</button>':'')+'</div><section><h3>Common symptoms</h3><p>'+e(x.symptoms)+'</p></section><section><h3>1 · Diagnostic questions</h3><ol>'+list(x.questions)+'</ol></section><section><h3>Model-appropriate settings</h3><ul>'+list(paths.map(d=>d+': '+modelNotes[d]))+'</ul><small>Confirm exact regional model and software. Not every model supports eSIM or every transfer method.</small></section><section><h3>2 · Safe steps</h3><ul class="checks">'+x.steps.map((v,i)=>'<li><input type="checkbox" id="step'+i+'" data-step="'+i+'" '+(checked[x.id]?.includes(i)?'checked':'')+'><label for="step'+i+'">'+e(v)+'</label></li>').join('')+'</ul></section><section><h3>Carrier context</h3>'+currentCarrierNotes().map(([n,[text,url]])=>'<p><strong>'+e(n)+':</strong> '+e(text)+(url?' <a target="_blank" rel="noopener noreferrer" href="'+e(url)+'">Official help</a>':'')+'</p>').join('')+'</section>'+(x.category==='Data Transfer'?'<section class="warning"><strong>Protect the old phone:</strong> Back up first. Do not erase either phone without consent and a verified backup. Banking, authenticator, WhatsApp, protected apps, purchases and logins may need separate procedures. Content transfer and cellular activation are separate.</section>':'')+'<section><div class="good"><h3>3 · Verify</h3>'+e(x.verify)+'</div></section><section><div class="warning"><h3>4 · Escalate when</h3>'+e(x.escalate)+'</div></section><section><h3>5 · Customer explanation</h3><p>“'+e(x.say)+'”</p></section>'+((x.refs||[]).length?'<section><h3>Official instructions</h3><ul>'+(x.refs||[]).filter(k=>sources[k]).map(k=>'<li><a target="_blank" rel="noopener noreferrer" href="'+e(sources[k][1])+'">'+e(sources[k][0])+'</a></li>').join('')+'</ul></section>':'');
+$('save').onclick=()=>{favorites.has(x.id)?favorites.delete(x.id):favorites.add(x.id);writeStore('cmhq-favorites-v3',[...favorites]);render();};
+$('copy').onclick=()=>copyGuide(x);$('print').onclick=()=>window.print();
+$('resetChecks').onclick=()=>{checked={};render();};
+$('detail').querySelectorAll('[data-step]').forEach(box=>box.onchange=()=>{checked[x.id]=Array.from($('detail').querySelectorAll('[data-step]:checked')).map(b=>Number(b.dataset.step));});
+if($('delete'))$('delete').onclick=()=>{if(confirm('Delete this custom guide? Export first if you need a backup.')){custom=custom.filter(v=>v.id!==x.id);favorites.delete(x.id);writeStore('cmhq-custom-v3',custom);writeStore('cmhq-favorites-v3',[...favorites]);render();}};
 }
-function filtered(){
-const query=$("search").value.toLowerCase().trim();
-const device=$("device").value;
-return data.filter(item=>{
-const text=[
-item.name,
-item.symptoms,
-...item.questions,
-...item.steps
-].join(" ").toLowerCase();
-return (
-(activeCategory==="All problems"||item.cat===activeCategory)&&
-(device==="All devices"||item.devices.includes(device))&&
-(!query||text.includes(query))
-);
-});
-}
-function renderCategories(){
-$("categories").replaceChildren();
-categories.forEach(category=>{
-const button=document.createElement("button");
-button.textContent=category;
-button.className=activeCategory===category?"active":"";
-button.setAttribute("aria-pressed",activeCategory===category);
-button.onclick=()=>{
-activeCategory=category;
-selected=filtered()[0]?.id;
-render();
-};
-$("categories").appendChild(button);
-});
-}
-function render(){
-renderCategories();
-const matches=filtered();
-$("count").textContent=
-matches.length+" scenario"+(matches.length===1?"":"s")+" found";
-if(!matches.some(item=>item.id===selected)){
-selected=matches[0]?.id;
-}
-$("list").replaceChildren();
-matches.forEach(item=>{
-const button=document.createElement("button");
-button.textContent=item.name;
-button.className=item.id===selected?"active":"";
-button.setAttribute("aria-pressed",item.id===selected);
-button.onclick=()=>{
-selected=item.id;
-render();
-};
-$("list").appendChild(button);
-});
-if(!matches.length){
-$("detail").innerHTML=
-'<p>No matching guides. Try another search or category.</p>';
-return;
-}
-const item=matches.find(item=>item.id===selected);
-const e=escapeHTML;
-$("detail").innerHTML=`
-<div class="tag">${e(item.cat)} · FIELD GUIDE</div>
-<h2>${e(item.name)}</h2>
-<p class="tag">${e(item.devices.join(" · "))}</p>
-<section>
-<h3>Common symptoms</h3>
-<p>${e(item.symptoms)}</p>
-</section>
-<section>
-<h3>1 · Questions to ask</h3>
-<ol>
-${item.questions.map(question=>`<li>${e(question)}</li>`).join("")}
-</ol>
-</section>
-<section>
-<h3>2 · Troubleshooting checklist</h3>
-<ul class="checks">
-${item.steps.map((step,index)=>`
-<li>
-<input type="checkbox" id="step-${index}">
-<label for="step-${index}">${e(step)}</label>
-</li>
-`).join("")}
-</ul>
-</section>
-<section>
-<div class="good">
-<h3>3 · Verify the fix</h3>
-${e(item.verify)}
-</div>
-</section>
-<section>
-<div class="warning">
-<h3>4 · Escalate when</h3>
-${e(item.escalate)}
-</div>
-</section>
-<section>
-<h3>5 · What to tell the customer</h3>
-<p><em>“${e(item.say)}”</em></p>
-</section>
-${item.sources?`
-<section>
-<h3>Official instructions</h3>
-<ul>
-${item.sources.map(([label,url])=>`
-<li>
-<a href="${e(url)}" target="_blank" rel="noopener noreferrer">
-${e(label)}
-</a>
-</li>
-`).join("")}
-</ul>
-</section>
-`:""}
-<div class="actions">
-<button class="primary" id="copy-guide">Copy guide</button>
-<button id="print-guide">Print / Save PDF</button>
-</div>
-`;
-$("copy-guide").onclick=()=>copyReport(item.id);
-$("print-guide").onclick=()=>window.print();
-}
-async function copyReport(id){
-const item=data.find(item=>item.id===id);
-const text=[
-item.name,
-"Symptoms: "+item.symptoms,
-"Questions:",
-...item.questions.map((value,index)=>(index+1)+". "+value),
-"Troubleshooting:",
-...item.steps.map((value,index)=>(index+1)+". "+value),
-"Verify: "+item.verify,
-"Escalate: "+item.escalate,
-"Customer explanation: "+item.say
-].join("\n");
-try{
-await navigator.clipboard.writeText(text);
-alert("Guide copied.");
-}catch{
-alert("Copy is unavailable here. Use Print / Save PDF instead.");
-}
-}
-$("search").addEventListener("input",render);
-$("device").addEventListener("change",render);
-render();
+async function copyGuide(x){const text=guideText(x);try{if(!navigator.clipboard)throw Error();await navigator.clipboard.writeText(text);$('status').textContent='Guide copied.';}catch{const box=document.createElement('textarea');box.id='copyFallback';box.value=text;box.setAttribute('aria-label','Select and copy guide text');$('status').replaceChildren('Automatic copy unavailable. Select and copy this text:',box);box.focus();box.select();}}
+function download(name,text){const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+for(const label of ['All categories',...groups]){const o=document.createElement('option');o.textContent=label;$('category').appendChild(o);}
+for(const [label,id,category] of [['No service','sos'],['SIM problems','sim'],['eSIM activation','esim'],['Replace eSIM','esim-replace'],['Compatibility','compat'],['iPhone activation','iphone-activation'],['Transfers',null,'Data Transfer'],['Message blocking','sms'],['Virus warnings','security']]){const b=document.createElement('button');b.textContent=label;b.onclick=()=>{clearFilters();if(category)$('category').value=category;selected=id;render();};$('quick').appendChild(b);}
+$('search').oninput=render;for(const id of ['device','carrier','category','savedOnly'])$(id).onchange=render;
+$('clear').onclick=()=>{clearFilters();render();};
+$('add').onclick=()=>{$('formError').textContent='';$('editor').showModal();};$('cancel').onclick=()=>$('editor').close();
+$('form').onsubmit=event=>{event.preventDefault();const form=new FormData(event.target),get=k=>String(form.get(k)||'').trim(),title=get('title');if(all().some(x=>normalize(x.title)===normalize(title))){$('formError').textContent='A guide with this title already exists. Open it instead.';return;}
+const words=normalize(title).split(' ').filter(w=>w.length>3);const similar=all().filter(x=>words.length&&words.filter(w=>normalize(x.title).includes(w)).length/words.length>=0.65);if(similar.length&&!confirm('Possible overlap: '+similar.map(x=>x.title).join('; ')+'. Save as a distinct scenario?'))return;
+const x={id:'custom-'+Date.now()+'-'+Math.random().toString(36).slice(2),title,category:get('category'),devices:get('device')==='All devices'?devices.slice():[get('device')],carriers:get('carrier')==='All carriers'?carriers.slice():[get('carrier')],symptoms:get('symptoms'),questions:get('questions').split('\n').map(v=>v.trim()).filter(Boolean),steps:get('steps').split('\n').map(v=>v.trim()).filter(Boolean),verify:get('verify'),escalate:get('escalate'),say:get('say'),refs:[]};if(!valid(x)){$('formError').textContent='Complete every field, including at least one question and step.';return;}custom.push(x);writeStore('cmhq-custom-v3',custom);clearFilters();selected=x.id;$('editor').close();event.target.reset();render();};
+$('export').onclick=()=>download('mobile-command-center-backup.json',JSON.stringify({version:3,custom,favorites:[...favorites]},null,2));
+$('importButton').onclick=()=>$('importFile').click();
+$('importFile').onchange=async event=>{const file=event.target.files[0];if(!file)return;try{if(file.size>2000000)throw Error('Backup exceeds 2 MB.');const backup=JSON.parse(await file.text());if(backup.version!==3||!Array.isArray(backup.custom)||backup.custom.length>500||!backup.custom.every(valid)||!Array.isArray(backup.favorites)||!backup.favorites.every(v=>typeof v==='string'))throw Error('Choose a backup exported by this version.');let added=0,skipped=0;for(const row of backup.custom){if(all().some(x=>x.id===row.id||normalize(x.title)===normalize(row.title))){skipped++;continue;}custom.push({...row,refs:[]});added++;}const ids=new Set(all().map(x=>x.id));for(const id of backup.favorites)if(ids.has(id))favorites.add(id);writeStore('cmhq-custom-v3',custom);writeStore('cmhq-favorites-v3',[...favorites]);$('status').textContent=added+' guides imported; '+skipped+' exact duplicates skipped. Review similarly named guides before adding more.';render();}catch(error){$('status').textContent='Import failed: '+error.message;}event.target.value='';};
+try{render();}catch(error){$('status').textContent='The guide could not load. Please report: '+error.message;console.error(error);}
 </script>
 </body>
 </html>
